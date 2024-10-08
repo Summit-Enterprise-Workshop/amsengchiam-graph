@@ -3,15 +3,17 @@ extend schema
     [
       "@key",
       "@tag",
-      "@shareable"
+      "@shareable",
+      "@authenticated"
     ]
   )
+
 
 type Query {
   """
   Get a specific order by id. Meant to be used for a detailed view of an order
   """
-  order(id: ID!): Order 
+  order(id: ID!): Order @authenticated
 }
 
 """
@@ -21,7 +23,7 @@ type Order @key(fields: "id") {
   """
   Each order has a unique id which is separate from the user or items they bought
   """
-  id: ID!
+  id: ID! 
 
   """
   The user who made the purchase
@@ -34,6 +36,8 @@ type Order @key(fields: "id") {
   """
   items: [ProductVariant!]!
 }
+
+
 
 type User @key(fields: "id") {
   id: ID!
